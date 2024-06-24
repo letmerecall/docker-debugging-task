@@ -1,0 +1,10 @@
+#--------------
+# NAMEKO CONFIG
+#--------------
+
+max_workers: 10
+parent_calls_tracked: 10
+rpc_exchange: 'nameko-rpc'
+WEB_SERVER_ADDRESS: '0.0.0.0:8000'
+AMQP_URI: pyamqp://${RABBIT_USER:guest}:${RABBIT_PASSWORD:guest}@${RABBIT_HOST:localhost}:${RABBIT_PORT:5672}/
+REDIS_URI: 'redis://localhost:6379/0'
