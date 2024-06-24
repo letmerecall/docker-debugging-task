@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  redis:
+    container_name: firestore-redis
+    image: redis:5.0.7-alpine
+    ports:
+      - "6379:6379"
+    restart: always
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.6-management
+    ports:
+      - "5672:5672"
+      - "5671:5671"
+      - "15672:15672"
+    restart: always
