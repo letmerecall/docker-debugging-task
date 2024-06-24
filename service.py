@@ -7,7 +7,7 @@ from redis_util import Redis
 class Service:
 
     name = 'service'
-    redis = Redis()
+    redis = Redis(decode_responses = True)
 
     @timer(interval=5)
     def worker(self):
@@ -25,5 +25,17 @@ class Service:
         Return the sum of current month, minute and second
         after getting it from Redis
         """
-        time = self.redis['current_time']
-        return 2021 + 6 + 23
+        date_time = self.redis.get('current_datetime')
+
+        date, time = date_time.split(' ')
+        date_year, date_month, date_date = date.split('-')
+        time_hour, time_min, time_sec = time.split(':')
+        time_sec, time_ms = time_sec.split(".")
+
+        final_time = date_year+date_month+date_date+time_hour+time_min+time_sec+time_ms
+
+        time_value = 0
+        for char in final_time:
+            time_value += int(char)
+
+        return time_value
