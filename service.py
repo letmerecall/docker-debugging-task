@@ -27,10 +27,9 @@ class Service:
         """
         date_time = self.redis.get('current_datetime')
 
-        date, time = date_time.split(' ')[0], date_time.split(' ')[1]
-        [date_year, date_month, date_date] = date.split('-')
-
-        [time_hour, time_min, time_sec] = time.split(':')
+        date, time = date_time.split(' ')
+        date_year, date_month, date_date = date.split('-')
+        time_hour, time_min, time_sec = time.split(':')
         time_sec, time_ms = time_sec.split(".")
 
         final_time = date_year+date_month+date_date+time_hour+time_min+time_sec+time_ms
